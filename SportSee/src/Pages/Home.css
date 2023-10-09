@@ -1,0 +1,14 @@
+.UserName{
+    margin: 40px 0px 0px 150px;
+}
+.UserName h1{
+    font-size: 46px;
+    margin: 20px 0px;
+}
+.UserName p{
+    font-size: 16px;
+}
+.UserName span{
+    color: #FF0101;
+}
+
