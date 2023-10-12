@@ -1,23 +1,14 @@
 import Home from "./Pages/Home";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
 
-function App() {
-
-  const isDataMocked = true;
-
-  if(isDataMocked){
-    fetch('./datamocked.json')
-  } else {
-    fetch('http://localhost:3000/user/12/')
-  }
-  
+function App() {  
   return (
     <Router>
-            <Routes>
-                <Route path="/" element={<Home />} />           
-            </Routes>
+      <Routes>
+          <Route path="/" element={<Navigate to="/user/12" />} />  
+          <Route path="/user/:id" element={<Home />} />      
+      </Routes>
     </Router> 
   )      
 }
-
 export default App

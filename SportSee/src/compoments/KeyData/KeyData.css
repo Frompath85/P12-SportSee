@@ -1,12 +1,8 @@
-.UserData{
-    display:flex;
-    flex-direction: raw;
-    gap: 20px;
-    justify-content: space-between;
-}
+
 .KeyItem{
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    align-items: center;
     background-color: #FBFBFB;
     padding: 20px;
 }
@@ -22,7 +18,10 @@
 .Title{
     font-size: 14px;
     color: #74798C;
+    margin: 3px;
 }
 .Value{
     font-size: 20px;
+    font-weight: 700;
+    margin: 3px;
 }

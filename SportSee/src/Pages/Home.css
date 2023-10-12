@@ -11,4 +11,20 @@
 .UserName span{
     color: #FF0101;
 }
-
+.UserData{
+    display:flex;
+    flex-direction: raw;
+    gap: 20px;
+    justify-content: space-between;
+    margin-left: 150px;
+}
+.UserChart{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.Chart2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
