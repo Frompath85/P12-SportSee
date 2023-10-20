@@ -1,0 +1,27 @@
+.container1{
+	position: relative;
+	width: 258px;
+	height: 263px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background: #ff0000;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
+	border-radius: 5px;
+
+}
+.title{
+    position: absolute;
+	font-weight: 500;
+	font-size: 15px;
+    width: 150px;
+    top: 29px;
+    left: 34px;
+    margin: 0px;
+	color: rgba(255, 255, 255, 0.5);
+}
+.diagramme{
+    position: absolute;
+    top: 70px;
+    left :  0px;
+}

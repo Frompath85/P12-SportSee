@@ -1,3 +1,22 @@
-.titre{
-    color: aqua;
+.TitreActivity{
+    font-size: 15px;
+    font-weight: 700;
+}
+.ValueActivity p {
+    font-size: 14px;
+    color: #74798C;
+}
+.ValueActivity{
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+.legend{
+    display: flex;
+    justify-content: space-between;
+}
+.container{
+    background: #FBFBFB;
+    border-radius: 5px;
+    padding: 10px 20px;
 }

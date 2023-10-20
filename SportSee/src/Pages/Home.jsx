@@ -7,26 +7,18 @@ import SessionChart from '../compoments/SessionChart/SessionChart'
 import PerformanceChart from '../compoments/Performance/PerformanceChart'
 import ScoreChart from '../compoments/Score/ScoreChart'
 import { useParams } from "react-router-dom";
-
+import getUserInfo from '../services/Api'
 import "./Home.css"
 
 export default function Home() {
 
-  const {id}= useParams();
+const {id}= useParams();
 
-  const [data, setData] = useState([]); 
-  const {userInfos, keyData } = data;
+const data = getUserInfo(id);
+const {userInfos, todayScore, keyData } = data;
 
-  useEffect(()=>{
-    const fetchData = async ()=> {
-        const response = await fetch("http://localhost:3000/user/"+id)
-        const UserData = await response.json()      
-        setData(UserData.data)
-        }
-        fetchData(); 
-  },[]);
 
-  if (data.length === 0) return null;
+if (data.length === 0) return null;// remplacer par un catch
   
   return (
     <>
@@ -34,7 +26,6 @@ export default function Home() {
       <NavBar></NavBar>
       <section className='UserName'>
         <h1> Bonjour <span> {userInfos.firstName} </span></h1>
-        {/* <h1> Bonjour <span> </span></h1> */}
         <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
       </section>
       <section className='UserData'>
@@ -42,12 +33,11 @@ export default function Home() {
         <ActivityChart UserId={id}></ActivityChart>
         <div className='Chart2'>
           <SessionChart  UserId={id}></SessionChart>
-          {/* <PerformanceChart  UserId={id}></PerformanceChart> */}
-          {/* <ScoreChart  UserId={id}></ScoreChart> */}
+          <PerformanceChart  UserId={id}></PerformanceChart>
+          <ScoreChart  UserScore={todayScore}></ScoreChart>
         </div>
         </section>
         <KeyData calories ={keyData.calorieCount} proteins ={keyData.proteinCount} glucides={keyData.carbohydrateCount} lipides={keyData.lipidCount}></KeyData>
-        {/* <KeyData > </KeyData> */}
       </section>
     </>
   )

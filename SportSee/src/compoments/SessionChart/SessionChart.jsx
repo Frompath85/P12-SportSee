@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { getUserSessions } from '../../services/Api';
 import {
   LineChart,
   Line,
@@ -6,45 +7,57 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  Rectangle
 } from "recharts";
+import SessionsTooltips from './SessionsTooltips';
+import  './SessionChart.css'
 
 export default function SessionChart(props) {
 
-  const [DataActivity, GetActivity] = useState([]); 
-  //console.log(DataActivity.sessions)
-  useEffect(()=>{
-    const fetchData = async ()=> {
-        const response = await fetch("http://localhost:3000/user/"+props.UserId+"/average-sessions")
-        const UserData = await response.json()     
-        GetActivity(UserData.data)
-        }
-        fetchData(); 
-  },[]);
+  const averageSessions = getUserSessions(props.UserId)
+
+  function CustomizedCursor({points}){
+    return (
+      <Rectangle
+        fill="black"
+        opacity={0.1}
+        width={500}
+        height={700}
+        x={points[1].x}
+        y={-20}
+        overflow={"visible"}
+        accentHeight={'120%'}
+      />
+    )
+  }
 
   return (
-    <div>
-      <LineChart 
-      width={300}
-      height={200}
-      data={DataActivity.sessions}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="day" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
+    <div className='container1'>
+      <p className='title'>Durée moyenne des sessions</p>
+      <LineChart className='diagramme' width={258}height={200} data={averageSessions}>
+      <XAxis 
+        dataKey="day" 
+        color="#fff" 
+        />
+      <YAxis 
+        hide={true}
+        dataKey={"sessionLength"} 
+        />
+      <Tooltip 
+        content={SessionsTooltips}
+        cursor={CustomizedCursor}  
+          />
+      {/* <Tooltip content={"sessionLength"}/> */}
       <Line
         type="monotone"
         dataKey="sessionLength"
-        stroke="#8884d8"
-        activeDot={{ r: 8 }}
+        stroke="#FFFFFF67"
+        strokeWidth={2}
+        activeDot={{
+              stroke: "rgba(255, 255, 255, 0.5)",
+							strokeWidth: 10,
+               r: 5 }}
       />
      
     </LineChart>

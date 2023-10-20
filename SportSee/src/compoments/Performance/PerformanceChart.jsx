@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { getPerformance } from '../../services/Api';
+import './Performance.css'
 import {
   Radar,
   RadarChart,
@@ -9,27 +11,17 @@ import {
 
 export default function PerformanceChart(props) {
 
-  const [DataActivity, GetActivity] = useState([]); 
-  console.log(DataActivity.kind)
-  console.log(DataActivity.data)
-  useEffect(()=>{
-    const fetchData = async ()=> {
-        const response = await fetch("http://localhost:3000/user/"+props.UserId+"/performance")
-        const UserData = await response.json()     
-        GetActivity(UserData.data)
-        }
-        fetchData(); 
-  },[]);
-
+  const DataPerformance = getPerformance(props.UserId)
+//console.log(DataPerformance)
   return (
-    <div>
-       <RadarChart
+    <div className='container2'>
+      <RadarChart
       cx={180}
       cy={150}
       outerRadius={150}
-      width={500}
-      height={500}
-      data={DataActivity.data}
+      width={300}
+      height={300}
+      data={DataPerformance}
     >
       <PolarGrid />
       <PolarAngleAxis dataKey="kind" />
