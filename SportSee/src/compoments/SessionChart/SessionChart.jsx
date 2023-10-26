@@ -35,7 +35,7 @@ export default function SessionChart(props) {
   return (
     <div className='container1'>
       <p className='title'>Durée moyenne des sessions</p>
-      <LineChart className='diagramme' width={258}height={200} data={averageSessions}>
+      <LineChart className='diagramme' width={200}height={140} data={averageSessions}>
       <XAxis 
         dataKey="day" 
         color="#fff" 

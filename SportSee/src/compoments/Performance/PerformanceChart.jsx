@@ -12,27 +12,32 @@ import {
 export default function PerformanceChart(props) {
 
   const DataPerformance = getPerformance(props.UserId)
-//console.log(DataPerformance)
+  //console.log(DataPerformance)
   return (
     <div className='container2'>
-      <RadarChart
-      cx={180}
-      cy={150}
-      outerRadius={150}
-      width={300}
-      height={300}
+      <RadarChart  
+      cx="50%" cy="50%"
+       outerRadius="60%"
+      width={190}
+      height={190}
       data={DataPerformance}
     >
       <PolarGrid />
-      <PolarAngleAxis dataKey="kind" />
-      {/* <PolarRadiusAxis /> */}
+      <PolarAngleAxis dataKey="kind" 
+            stroke="white"
+						 tickLine={false}
+             tickSize={10}
+             tick={{ fontSize: 10 }}  
+						 />
+      <PolarRadiusAxis   />
       <Radar
-        dataKey="Value"
+        dataKey="value"
         stroke="#FF0101"
         fill="#FF0101"
         fillOpacity={0.7}
       />
     </RadarChart>
+
     </div>
   )
 }

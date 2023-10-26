@@ -21,27 +21,34 @@ export default function getUserInfos(id) {
         }
         setData(result)
       }
-      fetchData();   
+      return () => fetchData();   
      },[]);
   return data;
 }
 
 export function getUserActivity(id) {
+    
      const [DataActivity, setActivity] = useState([]); 
+     
       useEffect(()=>{
         const fetchData = async ()=> {
-          let result2 = []
+        let result2 = [] 
           if(USE_MOCK_SERVICE){
-            result2 = MokedData.USER_ACTIVITY.find(ele => ele.userId == id)
+            result2 = MokedData.USER_ACTIVITY.find(ele => ele.userId == id).sessions
           }
           else{
             const response = await fetch("http://localhost:3000/user/"+id+"/activity")
             const UserData = await response.json()
-            result2 = UserData.data;
+            result2 = UserData.data.sessions;
           } 
-        setActivity(result2.sessions)
+          //modifier la date en mettant que le jour
+          for(let i=0; i<result2.length; i++){
+            const jour = new Date(result2[i].day).getDate()
+             result2[i].day=jour;
+          }  
+        setActivity(result2)
         }
-        fetchData();   
+       return ()=> fetchData();   
       },[]);
   return DataActivity;
 }
@@ -61,7 +68,7 @@ export function getUserSessions(id) {
         }
         setAverageSession(result3.sessions)
       }
-      fetchData();   
+      return () => fetchData();   
    },[]);
  return DataSession;
 }
@@ -77,13 +84,16 @@ export function getPerformance(id) {
         else{
             const response = await fetch("http://localhost:3000/user/"+id+"/performance")
             const UserData = await response.json()
-            result4 = UserData 
+            result4 = UserData.data
         }
+      // modification des données selon demandé
+        for(let i=0; i<result4.data.length; i++){
+          result4.data[i].kind = result4.kind[i+1]
+        }
+        
         setPerformance(result4.data)
       }
-      fetchData();   
-   },[]);
+      return () => fetchData();   
+   },[]);   
  return DataPerformance;
 }
-
-

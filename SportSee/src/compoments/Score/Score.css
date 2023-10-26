@@ -1,11 +1,31 @@
 .container3{
     position: relative;
-    width: 258px;
-    height: 263px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     background: #FBFBFB;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
     border-radius: 5px;
+    height: fit-content;
 }
+.ScoreTitle{
+    font-size: 15px;
+    font-weight: 700;
+    margin: 25px 0px 0px 25px;
+}
+.objectif{
+    position: absolute;
+    top: 30%;
+    left: 21%;
+    text-align: center; 
+    color:#74798C;
+    font-weight: 700;
+    background-color:white;
+    border-radius: 50%;
+    padding: 33px;
+}
+.objectif span{
+    color: #282D30;
+    font-size: 16px;
+}
+.objectif p {
+    margin: 0px;
+    font-size: 14px;
+}
+

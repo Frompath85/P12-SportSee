@@ -2,24 +2,28 @@ import "./ActivityChart.css"
 import React, { useEffect, useState } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from "recharts"
 import {getUserActivity} from '../../services/Api'
+import RedCircle from '../../assets/Oval red.png'
+import BlackCircle from '../../assets/Oval black.png'
+import ActivityTooltips from '../BarChart/ActivityChartToolTip'
+
 
 export default function ActivityChart(props) {
   const DataActivity = getUserActivity(props.UserId)
 
   return (
-    <div className="container">
+    <div className="Chart1">
       <div className="legend">
         <p className="TitreActivity">Activité quotidienne</p>
         <div className="ValueActivity">
-          <p>poids (Kg)</p>
-          <p>Calories brûlées (kCal)</p>
+          <p> <span><img src={BlackCircle} alt="" /></span>  poids (Kg)</p>
+          <p><span><img src={RedCircle} alt="" /></span> Calories brûlées (kCal)</p>
         </div>
       </div>
       
     
      <BarChart
-     width={835}
-     height={250}
+     width={600}
+     height={220}
      data={DataActivity}
      margin={{
        top: 5,
@@ -27,12 +31,22 @@ export default function ActivityChart(props) {
        left: 20,
        bottom: 5
      }}
+     barGap={8}
      >
      <CartesianGrid vertical={false} strokeDasharray="2 2" />
-     <XAxis dataKey="day" />
-     <YAxis  />
-     <Tooltip />
-     <Legend hide={true} />
+     <XAxis dataKey="day" 
+            axisLine={false} 
+            tickLine={false}
+      />
+     <YAxis datakey="kilogram"
+						orientation="right"
+            axisLine={false}
+            tickLine={false} 
+            tickCount={3}
+            tickMargin={30}
+      />
+     <Tooltip content={ActivityTooltips}/>
+     {/* <Legend hide={true} /> */}
 
      <Bar dataKey="kilogram"
            fill="#282D30" 

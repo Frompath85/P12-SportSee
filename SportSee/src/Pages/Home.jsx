@@ -15,8 +15,11 @@ export default function Home() {
 const {id}= useParams();
 
 const data = getUserInfo(id);
-const {userInfos, todayScore, keyData } = data;
+const {userInfos, keyData } = data;
 
+let todayScore = data.todayScore
+if(!todayScore)
+  todayScore = data.score
 
 if (data.length === 0) return null;// remplacer par un catch
   

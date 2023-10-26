@@ -1,4 +1,4 @@
-import './SessionsTooltips.css'
+import './SessionChart.css'
 
 export default function SessionsTooltips({active, payload}){
     if(active){
