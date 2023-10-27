@@ -1,5 +1,4 @@
 import "./ActivityChart.css"
-import React, { useEffect, useState } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from "recharts"
 import {getUserActivity} from '../../services/Api'
 import RedCircle from '../../assets/Oval red.png'
@@ -10,6 +9,14 @@ import ActivityTooltips from '../BarChart/ActivityChartToolTip'
 export default function ActivityChart(props) {
   const DataActivity = getUserActivity(props.UserId)
 
+  const KilogramArray = DataActivity.map((el) => el.kilogram)
+  const MinKg = Math.min(...KilogramArray)-30
+  const MaxKg = Math.max(...KilogramArray)+10
+
+  // const CaloriesArray = DataActivity.map((el) => el.calories)
+  // const MinCal = Math.min(...CaloriesArray)-30
+  // const MaxCal = Math.max(...CaloriesArray)+10
+
   return (
     <div className="Chart1">
       <div className="legend">
@@ -19,19 +26,13 @@ export default function ActivityChart(props) {
           <p><span><img src={RedCircle} alt="" /></span> Calories brûlées (kCal)</p>
         </div>
       </div>
-      
     
      <BarChart
-     width={600}
-     height={220}
-     data={DataActivity}
-     margin={{
-       top: 5,
-       right: 30,
-       left: 20,
-       bottom: 5
-     }}
-     barGap={8}
+        width={600}
+        height={220}
+        data={DataActivity}
+        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        barGap={8}
      >
      <CartesianGrid vertical={false} strokeDasharray="2 2" />
      <XAxis dataKey="day" 
@@ -42,11 +43,19 @@ export default function ActivityChart(props) {
 						orientation="right"
             axisLine={false}
             tickLine={false} 
-            tickCount={3}
+            tickCount={4}
             tickMargin={30}
+            domain={[MinKg, MaxKg]}
       />
-     <Tooltip content={ActivityTooltips}/>
-     {/* <Legend hide={true} /> */}
+      {/* <YAxis
+						datakey="calories"
+						 //hide={true}
+						 domain={[MinCal, MaxCal]}
+			/> */}
+      
+     {/* <Tooltip  /> */}
+     <Tooltip content={ActivityTooltips}
+     />
 
      <Bar dataKey="kilogram"
            fill="#282D30" 

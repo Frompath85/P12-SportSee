@@ -7,7 +7,7 @@
 .title{
     position: absolute;
 	font-weight: 500;
-	font-size: 15px;
+	font-size: 14px;
     width: 150px;
 	padding: 25px 0px 0px 25px;
     margin: 0px;
@@ -15,9 +15,13 @@
 }
 .diagramme{
 padding-top: 60px;
+
 }
 .sessions-tooltips {
     background-color: #fff;
-    padding: 1rem;
+    padding: 10px;
     font-size: 10px;
+}
+.recharts-tooltip-cursor{
+	visibility: hidden;
 }

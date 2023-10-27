@@ -23,7 +23,7 @@ if(!todayScore)
 
 if (data.length === 0) return null;// remplacer par un catch
   
-  return (
+  return(
     <>
       <Header></Header>
       <NavBar></NavBar>
