@@ -1,44 +1,46 @@
-import React, { useEffect, useState } from 'react'
+import  { useState } from 'react'
 import { getUserSessions } from '../../services/Api';
 import {
   LineChart,
   Line,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  Rectangle
+  Tooltip
 } from "recharts";
 import SessionsTooltips from './SessionsTooltips';
 import  './SessionChart.css'
 
 export default function SessionChart(props) {
 
-  const averageSessions = getUserSessions(props.UserId)
- // console.log(averageSessions)// execution 4fois !!!!
+const averageSessions = getUserSessions(props.UserId)
 
-  function CustomizedCursor(props){
-    console.log("x, y")
-    const { points } = props
-   const { x, y } = points[0]
-    
-    return (
-      <Rectangle
-        fill="black"
-        opacity={0.1}
-        width={100}
-        height={700}
-        x={x}
-        y={y - 20}
-      />
-    )
-  }
+ const [overlayX, setOverlayX] = useState(null);
+ const [widthValue, setOverlayXWidth] = useState(null);
+
+ const handleClick = (e) => {
+    if(e){
+      setOverlayX(e.activeCoordinate.x);
+      setOverlayXWidth(200 - e.activeCoordinate.x)
+    }
+    else{
+      setOverlayX(200); 
+      setOverlayXWidth(0)  }
+ }
+  
+ const StyleOverlay = {
+  position :'absolute',
+  background: '#000000',
+  opacity : '0.2',
+  height: '200px',
+  width : widthValue,
+  left: overlayX
+}
 
   return (
     <div className='container1'>
       <p className='title'>Durée moyenne des sessions</p>
-      <LineChart className='diagramme' width={200} height={140} data={averageSessions}>
+      <div className="overlay" style={StyleOverlay} />
+      <LineChart onClick={handleClick} className='diagramme' width={200} height={140} data={averageSessions}>
       <XAxis 
         dataKey="day" 
         color="#fff" 
@@ -52,13 +54,12 @@ export default function SessionChart(props) {
         hide={true}
         dataKey={"sessionLength"} 
         />
-      <Tooltip 
-        content={SessionsTooltips}
-        cursor={CustomizedCursor}  
+      <Tooltip  
+        content={SessionsTooltips} 
       />
   
       <Line
-      width={200}
+        width={200}
         type="monotone"
         dataKey="sessionLength"
         stroke="#FFFFFF67"
@@ -70,8 +71,8 @@ export default function SessionChart(props) {
               r: 4,
               fill: "rgba(255, 255, 255, 255)" }}
       />
-     
     </LineChart>
+    
     </div>
   )
-}
+} 

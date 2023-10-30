@@ -15,13 +15,16 @@
 }
 .diagramme{
 padding-top: 60px;
-
 }
+
 .sessions-tooltips {
     background-color: #fff;
     padding: 10px;
     font-size: 10px;
+	width: fit-content;
+	position: relative;
 }
+
 .recharts-tooltip-cursor{
 	visibility: hidden;
 }
