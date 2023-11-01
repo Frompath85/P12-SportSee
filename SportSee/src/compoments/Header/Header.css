@@ -3,7 +3,6 @@ header{
     justify-content: space-between;
     background-color: black;
     padding: 10px 20px;
-    width: 1024px;
 }
 header img{
     width: 150px;
@@ -12,7 +11,7 @@ header ul{
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 100px;
+    gap: 125px;
     margin-right: 20px;
 }
 header li{

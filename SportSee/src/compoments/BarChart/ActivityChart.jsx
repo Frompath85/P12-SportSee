@@ -45,7 +45,7 @@ export default function ActivityChart(props) {
             tickLine={false} 
             tickCount={4}
             tickMargin={30}
-            domain={[MinKg, MaxKg]}
+            // domain={[MinKg, MaxKg]}
       />
       {/* <YAxis
 						datakey="calories"
@@ -54,8 +54,9 @@ export default function ActivityChart(props) {
 			/> */}
       
      {/* <Tooltip  /> */}
-     <Tooltip content={ActivityTooltips}
-     />
+     <Tooltip /> 
+     {/* content={ActivityTooltips} */}
+     
 
      <Bar dataKey="kilogram"
            fill="#282D30" 
