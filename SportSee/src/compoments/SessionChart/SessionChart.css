@@ -25,6 +25,6 @@ padding-top: 60px;
 	position: relative;
 }
 
-.recharts-tooltip-cursor{
+.recharts-curve.recharts-tooltip-cursor{
 	visibility: hidden;
 }

@@ -21,7 +21,7 @@ let todayScore = data.todayScore
 if(!todayScore)
   todayScore = data.score
 
-if (data.length === 0) return null;// remplacer par un catch
+if (data.length === 0) return null; 
   
   return(
     <>
